@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "Split_Copy",
 	"properties": {
 		"activities": [
 			{
@@ -81,7 +81,6 @@
 														"storeSettings": {
 															"type": "AzureBlobFSReadSettings",
 															"recursive": true,
-															"wildcardFileName": "*.csv",
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
