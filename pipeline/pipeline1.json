@@ -1,0 +1,65 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.jsonArray",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline2",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"Pip_Object": {
+										"value": "@item()",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"jsonArray": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"key": "value_1"
+					},
+					{
+						"key": [
+							"value_2_1",
+							"value_2_2"
+						]
+					}
+				]
+			},
+			"obj": {
+				"type": "object"
+			}
+		},
+		"variables": {
+			"Var1": {
+				"type": "Array"
+			}
+		},
+		"annotations": []
+	}
+}
