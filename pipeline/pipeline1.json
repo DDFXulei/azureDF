@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.jsonArray",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute Pipeline1",
@@ -41,18 +42,15 @@
 				"type": "array",
 				"defaultValue": [
 					{
-						"key": "value_1"
+						"key_1": "value_1"
 					},
 					{
-						"key": [
+						"key_2": [
 							"value_2_1",
 							"value_2_2"
 						]
 					}
 				]
-			},
-			"obj": {
-				"type": "object"
 			}
 		},
 		"variables": {
