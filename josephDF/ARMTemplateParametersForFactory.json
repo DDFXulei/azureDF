@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "josephDF"
 		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
@@ -16,6 +19,9 @@
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephdl"
+		},
+		"trigger2_properties_typeProperties_scope": {
+			"value": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephstore"
 		}
 	}
 }
