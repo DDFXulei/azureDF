@@ -6,22 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "josephDF"
-		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
-		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://josephdl.dfs.core.windows.net"
-		},
-		"trigger1_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephdl"
 		}
 	},
 	"variables": {
@@ -49,8 +33,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "DelimitedText1",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -145,15 +128,13 @@
 														"inputs": [
 															{
 																"referenceName": "DelimitedText3",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "DelimitedText2",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -209,15 +190,13 @@
 												"inputs": [
 													{
 														"referenceName": "DelimitedText3",
-														"type": "DatasetReference",
-														"parameters": {}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
 													{
 														"referenceName": "DelimitedText2",
-														"type": "DatasetReference",
-														"parameters": {}
+														"type": "DatasetReference"
 													}
 												]
 											}
@@ -262,14 +241,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflow1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -344,15 +317,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText4",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DelimitedText5",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -450,9 +421,7 @@
 					"table": "Customer"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
@@ -709,35 +678,12 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"url": "https://josephdl.dfs.core.windows.net",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+						"value": "**********"
 					}
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
 			},
 			"dependsOn": []
 		},
@@ -828,15 +774,14 @@
 						"pipelineReference": {
 							"referenceName": "pipeline2",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/input/blobs/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"scope": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephdl",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
