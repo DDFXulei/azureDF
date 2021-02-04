@@ -13,9 +13,9 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/input/blobs/temp/",
+			"blobPathBeginsWith": "/input/blobs/",
 			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephdl",
+			"scope": "/subscriptions/b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f/resourceGroups/ChinaCXPTeam-Resources/providers/Microsoft.Storage/storageAccounts/josephstore",
 			"events": [
 				"Microsoft.Storage.BlobCreated"
 			]
