@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Myfile-formatA-20201201.csv",
 				"fileSystem": "input"
 			},
 			"columnDelimiter": ",",
