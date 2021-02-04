@@ -62,11 +62,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"Pip_Object": {
-				"type": "object"
-			}
-		},
 		"variables": {
 			"queryString": {
 				"type": "String"
