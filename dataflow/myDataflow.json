@@ -12,9 +12,21 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
-			"script": "parameters{\n\tparameter1 as string\n}\nsource(output(\n\t\t{DeptID|DeptNAme} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1"
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText11",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "parameters{\n\tdataflow as string (\"abc\")\n}\nsource(output(\n\t\tDeptID as string,\n\t\tDeptNAme as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(flowname = $dataflow) ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
