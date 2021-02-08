@@ -1,0 +1,41 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText12",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText13",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SurrogateKey1"
+				},
+				{
+					"name": "ConditionalSplit1"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\t{DeptID|DeptNAme} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('hash', 1)) ~> source1\nsource1 keyGenerate(output(Row_No as long),\n\tstartAt: 1L) ~> SurrogateKey1\nSurrogateKey1 split(Row_No<3,\n\tdisjoint: false) ~> ConditionalSplit1@(records, trails)\nSelect1 derive(DeptID = split({DeptID|DeptNAme},'|')[1],\n\t\tDeptNAme = split({DeptID|DeptNAme},'|')[2]) ~> DerivedColumn1\nConditionalSplit1@records select(mapColumn(\n\t\t{DeptID|DeptNAme}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nDerivedColumn1 sink(input(\n\t\tDeptID as string,\n\t\tDeptNAme as string,\n\t\tder_createDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}
